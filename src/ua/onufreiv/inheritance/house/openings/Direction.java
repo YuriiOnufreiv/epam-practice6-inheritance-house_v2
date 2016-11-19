@@ -1,7 +1,8 @@
 package ua.onufreiv.inheritance.house.openings;
 
 /**
- * Created by yurii on 11/14/16.
+ * This enum represents cardinal directions, such as
+ * north, east, south and west
  */
 public enum Direction {
     NORTH, SOUTH, WEST, EAST

@@ -5,20 +5,39 @@ import ua.onufreiv.inheritance.house.openings.LockableDoor;
 import java.util.Objects;
 
 /**
- * Created by yurii on 11/14/16.
+ * The purpose of this class is to generate 'keys' for the 'doors' when
+ * it is necessary to lock them.
+ * <p/> Has {@link Key} nested class in it.
+ *
+ * @author Yurii Onufreiv
+ * @version 1.0
  */
 public class KeyGenerator {
 
+    /**
+     * Generates new {@link Key} object for the specified door
+     *
+     * @param house house object, entry door of which must be locked
+     * @param door  door that must be locked
+     * @return generated {@code KeyGenerator.Key} object for further unlocking
+     */
     public static Key generateKey(House house, LockableDoor door) {
-        if(house == null || door == null) {
+        if (house == null || door == null) {
             throw new IllegalArgumentException("Null value(-s)");
         }
 
         return new Key(house, door);
     }
 
+    /**
+     * This class represents key for doors locking/unlocking.
+     * The lock is performed with the help of hash value of the specified door and house
+     */
     public static class Key {
 
+        /**
+         * Hash code of key
+         */
         private int hashKey;
 
         /**
@@ -46,10 +65,26 @@ public class KeyGenerator {
             return hashKey == formHashKey(house, door);
         }
 
+        /**
+         * Forms hash key for the specified house and door
+         *
+         * @param house that hosts passed {@code door}
+         * @param door  door for the key validation
+         * @return formed 'key' hash value
+         */
         private int formHashKey(House house, LockableDoor door) {
             return Objects.hash(house.hashCode(), door.hashCode());
         }
 
+        /**
+         * Checks this object for the equality with the {@code otherObject}.
+         * <p/>The equality condition is checked using the following field:
+         * {@code hashKey}
+         *
+         * @param otherObject the object to check with.
+         * @return {@code true} if the objects are the same;
+         * {@code false} otherwise.
+         */
         @Override
         public boolean equals(Object otherObject) {
             if (this == otherObject) return true;
@@ -63,11 +98,23 @@ public class KeyGenerator {
             return Objects.equals(hashKey, other.hashKey);
         }
 
+        /**
+         * Returns a hash code for this key.
+         * <p/>Based on {@code hashKey} value.
+         *
+         * @return a hash code value for this key object.
+         */
         @Override
         public int hashCode() {
             return Objects.hash(hashKey);
         }
 
+        /**
+         * Returns a {@code String} object representing this {@code Key} object's value.
+         * Includes it's class name and {@code hashKey} values
+         *
+         * @return a string representation of fields values of this object
+         */
         @Override
         public String toString() {
             return "Key[" +

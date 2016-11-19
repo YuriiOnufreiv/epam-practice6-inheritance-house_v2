@@ -1,7 +1,10 @@
 package ua.onufreiv.inheritance.house.openings;
 
 /**
- * Created by yurii on 11/14/16.
+ * This interface represents mechanism for opening some objects
+ *
+ * @author Yurii Onufreiv
+ * @version 1.0
  */
 public interface IOpenable {
     void open();
